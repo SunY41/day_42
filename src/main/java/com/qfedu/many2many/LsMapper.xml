@@ -1,0 +1,28 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qfedu.many2many.LsDao">
+    <resultMap id="LsMap" type="com.qfedu.many2many.Ls">
+        <id column="lid" property="lid"></id>
+        <result column="lname" property="lname"></result>
+        <collection property="xsList" javaType="list" ofType="com.qfedu.many2many.Xs">
+            <id column="xid" property="xid"></id>
+            <result column="xname" property="xname"></result>
+        </collection>
+    </resultMap>
+        <select id="findById" parameterType="int" resultType="com.qfedu.many2many.Ls">
+            select ls.lname from ls
+            inner join gll g
+            on g.lid=ls.lid
+            inner join xs
+            on xs.xid=g.xid
+            where xs.xid=#{xid}
+        </select>
+        <select id="findByLid" parameterType="int" resultMap="LsMap">
+    select x.* ,l.* from xs x
+    inner join gll g
+    on g.xid=x.xid
+    inner join ls l
+    on l.lid=g.lid
+    where l.lid=#{lid}
+        </select>
+</mapper>
