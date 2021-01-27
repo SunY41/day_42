@@ -1,0 +1,15 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qfedu.one2many.YgDao">
+    <resultMap id="ygMap" type="com.qfedu.one2many.Yg">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <association property="bm" resultMap="com.qfedu.one2many.BmDao.bmMap0"></association>
+    </resultMap>
+    <select id="findById" parameterType="int"  resultType="com.qfedu.one2many.Yg">
+        select *from yg where bid=#{bid}
+    </select>
+    <select id="findByBid" parameterType="int" resultMap="ygMap">
+        select *from yg inner join bm on bm.bid=yg.bid where id=#{id}
+    </select>
+</mapper>

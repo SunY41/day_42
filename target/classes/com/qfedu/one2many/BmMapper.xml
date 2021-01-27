@@ -1,0 +1,33 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qfedu.one2many.BmDao">
+    <resultMap id="bmMap0" type="com.qfedu.one2many.Bm">
+        <id column="bid" property="bid"></id>
+        <result column="bname" property="bname"></result>
+    </resultMap>
+    <resultMap id="bmMap" type="com.qfedu.one2many.Bm">
+        <id column="bid" property="bid"></id>
+        <result column="bnmae" property="bname"></result>
+      <collection property="ygList" javaType="list" ofType="com.qfedu.one2many.Yg">
+          <id column="id" property="id"></id>
+          <result column="name" property="name"></result>
+      </collection>
+    </resultMap>
+    <resultMap id="bmMap2" type="com.qfedu.one2many.Bm">
+        <id column="bid" property="bid"></id>
+        <result column="bname" property="bname"></result>
+        <collection property="ygList" javaType="list" ofType="com.qfedu.one2many.yg" column="bid"
+        select="com.qfedu.one2many.YgDao.findById">
+
+        </collection>
+    </resultMap>
+
+    <select id="findById" parameterType="int" resultMap="bmMap">
+         select *from yg inner join bm on yg.bid=bm.bid where bm.bid=#{bm.bid};
+    </select>
+    <select id="findById2" parameterType="int" resultMap="bmMap2">
+        select * from bm where bid=#{bid}
+    </select>
+
+
+</mapper>
