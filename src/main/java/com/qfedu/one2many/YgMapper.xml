@@ -6,10 +6,21 @@
         <result column="name" property="name"></result>
         <association property="bm" resultMap="com.qfedu.one2many.BmDao.bmMap0"></association>
     </resultMap>
+    <resultMap id="ygMap2" type="com.qfedu.one2many.Yg">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <association property="bm" resultMap="com.qfedu.one2many.BmDao.bmMap4"></association>
+    </resultMap>
     <select id="findById" parameterType="int"  resultType="com.qfedu.one2many.Yg">
         select *from yg where bid=#{bid}
     </select>
     <select id="findByBid" parameterType="int" resultMap="ygMap">
         select *from yg inner join bm on bm.bid=yg.bid where id=#{id}
+    </select>
+    <select id="findById1" parameterType="int" resultMap="ygMap2">
+        select * from yg
+        inner join bm
+        on yg.bid=bm.bid
+        where yg.id=#{id}
     </select>
 </mapper>

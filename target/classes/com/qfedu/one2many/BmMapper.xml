@@ -1,6 +1,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qfedu.one2many.BmDao">
+    <resultMap id="bmMap4" type="com.qfedu.one2many.Bm">
+        <id column="bid" property="bid"></id>
+        <result column="bname" property="bname"></result>
+    </resultMap>
     <resultMap id="bmMap0" type="com.qfedu.one2many.Bm">
         <id column="bid" property="bid"></id>
         <result column="bname" property="bname"></result>

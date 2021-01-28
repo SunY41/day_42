@@ -45,12 +45,19 @@ public class Demo {
         SqlSession session = factory.openSession();
         YgDao mapper = session.getMapper(YgDao.class);
         Yg byId = mapper.findByBid(4);
-        System.out.println(byId);
+        String bname = byId.getBm().getBname();
+        System.out.println(bname);
         session.commit();
         session.close();
     }
-
+        public static void ii(){
+            SqlSession sqlSession = factory.openSession();
+            YgDao mapper = sqlSession.getMapper(YgDao.class);
+            Yg byId = mapper.findById1(2);
+            System.out.println(byId);
+        }
     public static void main(String[] args) {
-        findByBid();
+//        findByBid();
+        ii();
     }
 }
